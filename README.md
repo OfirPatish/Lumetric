@@ -2,6 +2,10 @@
 
 A professional SaaS dashboard showcasing modern front-end development with Next.js, React, and TypeScript. Features interactive data visualizations, responsive design, and a polished user experience.
 
+## 🌐 Live Demo
+
+**[View Live Demo →](https://opdev-lumetric.vercel.app/)**
+
 ## Features
 
 - **Interactive Charts** - Revenue, users, and engagement visualizations
