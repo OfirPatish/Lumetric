@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lumetric - Business Insights Dashboard
 
-## Getting Started
+A professional SaaS dashboard showcasing modern front-end development with Next.js, React, and TypeScript. Features interactive data visualizations, responsive design, and a polished user experience.
 
-First, run the development server:
+## Features
+
+- **Interactive Charts** - Revenue, users, and engagement visualizations
+- **Dark Mode** - Theme toggle with persistent preferences
+- **Fully Responsive** - Mobile-first design for all screen sizes
+- **Data Export** - CSV download functionality
+- **Multi-page Navigation** - Dashboard, Analytics, Users, and Revenue pages
+
+## Tech Stack
+
+Next.js 16 • React 19 • TypeScript • Tailwind CSS v4 • Shadcn UI • Recharts
+
+## Quick Start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+src/
+├── app/              # Pages (Dashboard, Analytics, Users, Revenue)
+├── components/       # Reusable UI components
+└── lib/             # Utilities and mock data
+```
 
-## Learn More
+## Responsive Design
 
-To learn more about Next.js, take a look at the following resources:
+- **Mobile** (< 640px): Single column layout, slide-out menu
+- **Tablet** (640px - 1024px): 2-column grids, optimized spacing
+- **Desktop** (> 1024px): Full 4-column metrics, side-by-side charts
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Built as a front-end showcase project demonstrating modern React patterns and professional UI/UX design.

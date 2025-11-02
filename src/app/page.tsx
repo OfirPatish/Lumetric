@@ -1,66 +1,81 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { useState } from "react";
+import { Sidebar } from "@/components/dashboard/sidebar";
+import { Header } from "@/components/dashboard/header";
+import { MetricCard } from "@/components/dashboard/metric-card";
+import { SalesChart } from "@/components/dashboard/sales-chart";
+import { UsersChart } from "@/components/dashboard/users-chart";
+import { EngagementChart } from "@/components/dashboard/engagement-chart";
+import { UsersTable } from "@/components/dashboard/users-table";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetDescription,
+} from "@/components/ui/sheet";
+import {
+  metricCards,
+  salesData,
+  usersData,
+  engagementData,
+  recentUsers,
+} from "@/lib/mock-data";
+
+export default function Dashboard() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="flex h-screen overflow-hidden">
+      {/* Desktop Sidebar */}
+      <Sidebar className="hidden md:flex" />
+      
+      {/* Mobile Menu Sheet */}
+      <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+        <SheetContent side="left" className="w-64 p-0">
+          <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
+          <SheetDescription className="sr-only">
+            Main navigation menu for Lumetric dashboard
+          </SheetDescription>
+          <Sidebar onLinkClick={() => setMobileMenuOpen(false)} />
+        </SheetContent>
+      </Sheet>
+
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <Header onMenuClick={() => setMobileMenuOpen(true)} />
+        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-background via-muted/30 to-background p-3 sm:p-4 md:p-6">
+          <div className="mx-auto max-w-7xl space-y-4 md:space-y-6">
+            {/* Page Header */}
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">Dashboard</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+                  Welcome back, here's what's happening with your business today.
+                </p>
+              </div>
+            </div>
+
+            {/* Metric Cards */}
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+              {metricCards.map((metric, index) => (
+                <MetricCard key={index} metric={metric} />
+              ))}
+            </div>
+
+            {/* Charts Row 1 */}
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-2">
+              <SalesChart data={salesData} />
+              <UsersChart data={usersData} />
+            </div>
+
+            {/* Charts Row 2 */}
+            <div className="grid gap-3 sm:gap-4 grid-cols-1 lg:grid-cols-2">
+              <EngagementChart data={engagementData} />
+              <UsersTable data={recentUsers} />
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }
