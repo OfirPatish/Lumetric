@@ -14,8 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Lumetric - Business Insights Dashboard",
-  description: "Professional business insights dashboard for visualizing key metrics, revenue, users, and engagement data",
-  keywords: ["dashboard", "analytics", "business intelligence", "data visualization", "metrics", "SaaS"],
+  description:
+    "Professional business insights dashboard for visualizing key metrics, revenue, users, and engagement data",
+  keywords: [
+    "dashboard",
+    "analytics",
+    "business intelligence",
+    "data visualization",
+    "metrics",
+    "SaaS",
+  ],
   authors: [{ name: "Lumetric" }],
   manifest: "/site.webmanifest",
   appleWebApp: {
@@ -35,7 +43,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Lumetric - Business Insights Dashboard",
-    description: "Professional business insights dashboard for visualizing key metrics",
+    description:
+      "Professional business insights dashboard for visualizing key metrics",
     type: "website",
   },
 };
