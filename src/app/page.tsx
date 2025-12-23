@@ -50,7 +50,7 @@ export default function Dashboard() {
               <div>
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">Dashboard</h1>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                  Welcome back, here's what's happening with your business today.
+                  Welcome back, here&apos;s what&apos;s happening with your business today.
                 </p>
               </div>
             </div>

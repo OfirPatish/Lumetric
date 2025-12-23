@@ -1,6 +1,6 @@
 // Utility functions for exporting data
 
-export function exportToCSV<T extends Record<string, any>>(
+export function exportToCSV<T extends Record<string, unknown>>(
   data: T[],
   filename: string,
   headers?: Record<keyof T, string>

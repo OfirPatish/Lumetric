@@ -57,8 +57,10 @@ export function createCustomTooltip(
   formatter?: (value: number) => string,
   labelFormatter?: (label: string) => string
 ) {
-  return (props: TooltipProps<number, string>) => (
+  const TooltipWrapper = (props: TooltipProps<number, string>) => (
     <CustomTooltip {...props} formatter={formatter} labelFormatter={labelFormatter} />
   );
+  TooltipWrapper.displayName = "CustomTooltipWrapper";
+  return TooltipWrapper;
 }
 
