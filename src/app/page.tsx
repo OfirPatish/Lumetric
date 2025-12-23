@@ -29,7 +29,7 @@ export default function Dashboard() {
     <div className="flex h-screen overflow-hidden">
       {/* Desktop Sidebar */}
       <Sidebar className="hidden md:flex" />
-      
+
       {/* Mobile Menu Sheet */}
       <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
         <SheetContent side="left" className="w-64 p-0">
@@ -48,9 +48,12 @@ export default function Dashboard() {
             {/* Page Header */}
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">Dashboard</h1>
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">
+                  Dashboard
+                </h1>
                 <p className="text-xs sm:text-sm text-muted-foreground mt-1">
-                  Welcome back, here&apos;s what&apos;s happening with your business today.
+                  Welcome back, here&apos;s what&apos;s happening with your
+                  business today.
                 </p>
               </div>
             </div>

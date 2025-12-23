@@ -6,7 +6,7 @@ A professional SaaS dashboard showcasing modern front-end development with Next.
 
 ## 🚀 Tech Stack
 
-**Frontend:** Next.js 16, React 19, TypeScript, Tailwind CSS v4, Shadcn UI, Recharts
+**Frontend:** Next.js 15.5.7, React 19.1, TypeScript, Tailwind CSS v4, Shadcn UI, Recharts
 
 ## ✨ Key Features
 

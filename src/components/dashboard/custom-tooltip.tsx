@@ -28,10 +28,7 @@ export function CustomTooltip({
           {labelFormatter ? labelFormatter(String(label)) : String(label)}
         </p>
         {payload.map((entry, index) => (
-          <div
-            key={index}
-            className="flex items-center gap-2 text-sm"
-          >
+          <div key={index} className="flex items-center gap-2 text-sm">
             <div
               className="h-2.5 w-2.5 rounded-full"
               style={{ backgroundColor: entry.color }}
@@ -58,9 +55,12 @@ export function createCustomTooltip(
   labelFormatter?: (label: string) => string
 ) {
   const TooltipWrapper = (props: TooltipProps<number, string>) => (
-    <CustomTooltip {...props} formatter={formatter} labelFormatter={labelFormatter} />
+    <CustomTooltip
+      {...props}
+      formatter={formatter}
+      labelFormatter={labelFormatter}
+    />
   );
   TooltipWrapper.displayName = "CustomTooltipWrapper";
   return TooltipWrapper;
 }
-
