@@ -10,7 +10,52 @@ import {
   SheetTitle,
   SheetDescription,
 } from "@/components/ui/sheet";
-import { BarChart3, TrendingUp, Activity, Target } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+  BarChart3,
+  TrendingUp,
+  Activity,
+  Target,
+  Monitor,
+  Smartphone,
+  Tablet,
+  Globe,
+} from "lucide-react";
+import {
+  PieChart,
+  Pie,
+  Cell,
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+  Legend,
+} from "recharts";
+import { createCustomTooltip } from "@/components/dashboard/custom-tooltip";
+
+const trafficSources = [
+  { name: "Organic Search", value: 45, color: "var(--chart-1)" },
+  { name: "Direct", value: 25, color: "var(--chart-2)" },
+  { name: "Social Media", value: 18, color: "var(--chart-3)" },
+  { name: "Email", value: 12, color: "var(--chart-4)" },
+];
+
+const deviceData = [
+  { device: "Desktop", users: 12500, percentage: 65 },
+  { device: "Mobile", users: 5800, percentage: 30 },
+  { device: "Tablet", users: 900, percentage: 5 },
+];
+
+const pageViewsData = [
+  { page: "Home", views: 4520 },
+  { page: "Products", views: 3200 },
+  { page: "About", views: 2100 },
+  { page: "Contact", views: 1800 },
+  { page: "Blog", views: 1500 },
+];
 
 export default function AnalyticsPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -101,23 +146,120 @@ export default function AnalyticsPage() {
               </Card>
             </div>
 
-            <Card className="transition-all hover:shadow-md">
-              <CardHeader>
-                <CardTitle>Advanced Analytics</CardTitle>
-                <CardDescription>
-                  Detailed analytics and insights coming soon
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-center h-64 text-muted-foreground">
-                  <div className="text-center">
-                    <BarChart3 className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                    <p className="text-sm">Advanced analytics features</p>
-                    <p className="text-xs mt-1">Visualizations and reports will appear here</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+            <Tabs defaultValue="traffic" className="space-y-4">
+              <TabsList>
+                <TabsTrigger value="traffic">Traffic Sources</TabsTrigger>
+                <TabsTrigger value="devices">Devices</TabsTrigger>
+                <TabsTrigger value="pages">Top Pages</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="traffic" className="space-y-4">
+                <Card className="transition-all hover:shadow-md">
+                  <CardHeader>
+                    <CardTitle>Traffic Sources</CardTitle>
+                    <CardDescription>
+                      Distribution of traffic by source
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <PieChart>
+                        <Pie
+                          data={trafficSources}
+                          cx="50%"
+                          cy="50%"
+                          labelLine={false}
+                          label={({ name, percent }) => `${name}: ${((percent || 0) * 100).toFixed(0)}%`}
+                          outerRadius={100}
+                          fill="#8884d8"
+                          dataKey="value"
+                        >
+                          {trafficSources.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
+                        </Pie>
+                        <Tooltip content={createCustomTooltip((value: number) => `${value}%`)} />
+                      </PieChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="devices" className="space-y-4">
+                <Card className="transition-all hover:shadow-md">
+                  <CardHeader>
+                    <CardTitle>Device Breakdown</CardTitle>
+                    <CardDescription>
+                      User distribution across devices
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {deviceData.map((device, index) => (
+                        <div key={device.device} className="space-y-2">
+                          <div className="flex items-center justify-between text-sm">
+                            <div className="flex items-center gap-2">
+                              {device.device === "Desktop" && <Monitor className="h-4 w-4 text-muted-foreground" />}
+                              {device.device === "Mobile" && <Smartphone className="h-4 w-4 text-muted-foreground" />}
+                              {device.device === "Tablet" && <Tablet className="h-4 w-4 text-muted-foreground" />}
+                              <span className="font-medium">{device.device}</span>
+                            </div>
+                            <div className="flex items-center gap-3">
+                              <span className="text-muted-foreground">{device.users.toLocaleString()} users</span>
+                              <span className="font-semibold">{device.percentage}%</span>
+                            </div>
+                          </div>
+                          <div className="h-2 bg-muted rounded-full overflow-hidden">
+                            <div
+                              className="h-full rounded-full transition-all"
+                              style={{
+                                width: `${device.percentage}%`,
+                                backgroundColor: `var(--chart-${index + 1})`,
+                              }}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="pages" className="space-y-4">
+                <Card className="transition-all hover:shadow-md">
+                  <CardHeader>
+                    <CardTitle>Top Pages</CardTitle>
+                    <CardDescription>
+                      Most visited pages this month
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <BarChart data={pageViewsData} margin={{ top: 10, right: 15, left: 5, bottom: 10 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="var(--muted)" opacity={0.3} />
+                        <XAxis
+                          dataKey="page"
+                          tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <YAxis
+                          tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <Tooltip content={createCustomTooltip((value: number) => `${value.toLocaleString()} views`)} />
+                        <Bar
+                          dataKey="views"
+                          fill="var(--chart-1)"
+                          radius={[8, 8, 0, 0]}
+                        />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+              </TabsContent>
+            </Tabs>
           </div>
         </main>
       </div>

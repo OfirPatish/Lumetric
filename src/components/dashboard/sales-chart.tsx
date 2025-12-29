@@ -21,15 +21,15 @@ export function SalesChart({ data }: SalesChartProps) {
   return (
     <Card className="transition-all hover:shadow-md">
       <CardHeader>
-        <CardTitle className="text-base sm:text-lg">Revenue Overview</CardTitle>
-        <CardDescription className="text-xs sm:text-sm">
+        <CardTitle>Revenue Overview</CardTitle>
+        <CardDescription>
           Monthly revenue for the past year
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+          <LineChart data={data} margin={{ top: 10, right: 15, left: 5, bottom: 10 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--muted)" opacity={0.3} />
             <XAxis
               dataKey="date"
               tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
@@ -51,9 +51,9 @@ export function SalesChart({ data }: SalesChartProps) {
               type="monotone"
               dataKey="value"
               stroke="var(--chart-1)"
-              strokeWidth={2}
+              strokeWidth={2.5}
               dot={false}
-              activeDot={{ r: 6 }}
+              activeDot={{ r: 6, fill: "var(--chart-1)", strokeWidth: 2, stroke: "var(--background)" }}
             />
           </LineChart>
         </ResponsiveContainer>

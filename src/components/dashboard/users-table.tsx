@@ -14,13 +14,13 @@ import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TableRow as TableRowType } from "@/lib/mock-data";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Download } from "lucide-react";
 import { exportToCSV } from "@/lib/export-utils";
+import { cn } from "@/lib/utils";
 
 interface UsersTableProps {
   data: TableRowType[];
@@ -71,46 +71,44 @@ export function UsersTable({ data }: UsersTableProps) {
     <Card className="transition-all hover:shadow-md">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
         <div>
-          <CardTitle className="text-base sm:text-lg">Recent Users</CardTitle>
-          <CardDescription className="text-xs sm:text-sm">
+          <CardTitle>Recent Users</CardTitle>
+          <CardDescription>
             A list of recently registered users
           </CardDescription>
         </div>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleExport}
-                className="h-8 gap-2"
-              >
-                <Download className="h-3 w-3 sm:h-4 sm:w-4" />
-                <span className="hidden sm:inline">Export</span>
-              </Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Download as CSV</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleExport}
+              className="h-8 gap-2 hover:bg-accent"
+            >
+              <Download className="h-3 w-3 sm:h-4 sm:w-4" />
+              <span className="hidden sm:inline">Export</span>
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Download as CSV</p>
+          </TooltipContent>
+        </Tooltip>
       </CardHeader>
       <CardContent className="p-0 sm:p-6">
         <div className="overflow-x-auto">
           <ScrollArea className="h-[400px]">
             <Table>
               <TableHeader>
-                <TableRow>
-                  <TableHead className="min-w-[120px]">Name</TableHead>
-                  <TableHead className="min-w-[180px]">Email</TableHead>
-                  <TableHead className="min-w-[100px]">Status</TableHead>
-                  <TableHead className="text-right min-w-[100px]">Revenue</TableHead>
-                  <TableHead className="min-w-[120px]">Signup Date</TableHead>
+                <TableRow className="border-border/50">
+                  <TableHead className="min-w-[120px] font-semibold">Name</TableHead>
+                  <TableHead className="min-w-[180px] font-semibold">Email</TableHead>
+                  <TableHead className="min-w-[100px] font-semibold">Status</TableHead>
+                  <TableHead className="text-right min-w-[100px] font-semibold">Revenue</TableHead>
+                  <TableHead className="min-w-[120px] font-semibold">Signup Date</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {data.map((user) => (
-                  <TableRow key={user.id} className="hover:bg-muted/50 transition-colors">
+                  <TableRow key={user.id} className="hover:bg-muted/50 transition-colors border-border/30">
                     <TableCell className="font-medium">{user.name}</TableCell>
                     <TableCell className="text-muted-foreground text-sm">
                       {user.email}
@@ -118,12 +116,12 @@ export function UsersTable({ data }: UsersTableProps) {
                     <TableCell>
                       <Badge
                         variant="secondary"
-                        className={statusColors[user.status]}
+                        className={cn(statusColors[user.status], "font-medium")}
                       >
                         {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-right font-medium text-sm">
+                    <TableCell className="text-right font-semibold text-sm">
                       {formatCurrency(user.revenue)}
                     </TableCell>
                     <TableCell className="text-muted-foreground text-sm">

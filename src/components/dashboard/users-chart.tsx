@@ -21,15 +21,15 @@ export function UsersChart({ data }: UsersChartProps) {
   return (
     <Card className="transition-all hover:shadow-md">
       <CardHeader>
-        <CardTitle className="text-base sm:text-lg">Active Users</CardTitle>
-        <CardDescription className="text-xs sm:text-sm">
+        <CardTitle>Active Users</CardTitle>
+        <CardDescription>
           Daily active users for the past week
         </CardDescription>
       </CardHeader>
       <CardContent>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={data} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
-            <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
+          <BarChart data={data} margin={{ top: 10, right: 15, left: 5, bottom: 10 }}>
+            <CartesianGrid strokeDasharray="3 3" stroke="var(--muted)" opacity={0.3} />
             <XAxis
               dataKey="date"
               tick={{ fill: "var(--muted-foreground)", fontSize: 11 }}
